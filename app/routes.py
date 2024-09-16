@@ -5,8 +5,23 @@ import pandas as pd
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
+import gdown
 
 bp = Blueprint('routes', __name__)
+
+# URL to download the model from Google Drive
+MODEL_URL = "https://drive.google.com/file/d/1x9hSSGzEnLDhMPzKTDzJ8O-Zd1HcepqX/view?usp=sharing"  # replace YOUR_FILE_ID with your Google Drive file ID
+
+def download_model_if_needed():
+    model_path = 'models/efficientnetb3_gujarati.h5'
+    if not os.path.exists(model_path):
+        print("Model not found, downloading...")
+        gdown.download(MODEL_URL, model_path, quiet=False)
+    else:
+        print("Model already exists.")
+
+# Call this function before loading the model
+download_model_if_needed()
 
 # Load the model and class dictionary
 model_path = 'models/efficientnetb3_gujarati.h5'

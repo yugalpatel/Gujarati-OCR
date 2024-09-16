@@ -2,6 +2,7 @@ from flask import Flask
 from routes import bp as routes_bp
 from app import create_app
 
+
 def create_app():
     app = Flask(__name__)
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -10,7 +11,12 @@ def create_app():
     
     return app
 
+print("Creating the app...")
+
 app = create_app()
+
+
+print("App created successfully!")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

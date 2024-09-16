@@ -5,3 +5,4 @@ numpy
 Pillow==8.2.0
 Werkzeug==2.0.1
 gunicorn
+gdown
