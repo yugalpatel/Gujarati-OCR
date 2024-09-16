@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
+from tensorflow.keras.layers import DepthwiseConv2D
 
 bp = Blueprint('routes', __name__)
 
@@ -13,9 +14,13 @@ model_path = 'models/efficientnetb3_gujarati.h5'
 class_dict_path = 'models/class_dict.csv'
 
 def custom_objects():
-    from tensorflow.keras.layers import DepthwiseConv2D
-    custom_objs = {'DepthwiseConv2D': DepthwiseConv2D}
-    return custom_objs
+    class CustomDepthwiseConv2D(DepthwiseConv2D):
+        def __init__(self, *args, **kwargs):
+            if 'groups' in kwargs:
+                del kwargs['groups']
+            super().__init__(*args, **kwargs)
+
+    return {'DepthwiseConv2D': CustomDepthwiseConv2D}
 
 model = load_model(model_path, custom_objects=custom_objects())
 class_df = pd.read_csv(class_dict_path)
