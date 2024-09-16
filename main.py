@@ -1,5 +1,6 @@
 from flask import Flask
 from routes import bp as routes_bp
+from app import create_app
 
 def create_app():
     app = Flask(__name__)
