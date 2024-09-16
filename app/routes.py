@@ -1,34 +1,24 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app
+from flask import Blueprint, render_template, request, redirect, url_for
 import os
 import tensorflow as tf
 import pandas as pd
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
-import gdown
 
 bp = Blueprint('routes', __name__)
 
-# Model download logic
-MODEL_URL = "https://drive.google.com/uc?id=YOUR_FILE_ID"  # Replace with your actual file ID
+# Load the model and class dictionary
 model_path = 'models/efficientnetb3_gujarati.h5'
+class_dict_path = 'models/class_dict.csv'
 
-def download_model_if_needed():
-    if not os.path.exists(model_path):
-        print("Model not found, downloading...")
-        gdown.download(MODEL_URL, model_path, quiet=False)
-    else:
-        print("Model already exists.")
-
-download_model_if_needed()
-
-# Load model
 def custom_objects():
     from tensorflow.keras.layers import DepthwiseConv2D
-    return {'DepthwiseConv2D': DepthwiseConv2D}
+    custom_objs = {'DepthwiseConv2D': DepthwiseConv2D}
+    return custom_objs
 
 model = load_model(model_path, custom_objects=custom_objects())
-class_df = pd.read_csv('models/class_dict.csv')
+class_df = pd.read_csv(class_dict_path)
 class_indices = class_df.set_index('class_index')['class'].to_dict()
 
 def preprocess_image(image, img_size):
@@ -46,16 +36,24 @@ def index():
         if file.filename == '':
             return redirect(request.url)
         if file:
-            filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
+            filename = file.filename
+            filepath = os.path.join('static/uploads', filename)
             file.save(filepath)
 
+            # Process the image and predict
+            img_size = (40, 40)
             img = Image.open(filepath)
-            img = preprocess_image(img, (40, 40))
+            img = preprocess_image(img, img_size)
             predictions = model.predict(img)
             predicted_class = class_indices[np.argmax(predictions)]
 
-            return render_template('result.html', filename=file.filename, prediction=predicted_class)
-
+            return render_template('result.html', filename=filename, prediction=predicted_class)
+    
     return render_template('index.html')
+
+@bp.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
 
 
