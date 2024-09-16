@@ -1,11 +1,11 @@
-from flask import Flask
 import os
+from flask import Flask
+from .routes import bp as routes_bp
 
 def create_app():
-    app = Flask(__name__, template_folder='../templates')
+    app = Flask(__name__)
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
     
-    from . import routes
-    app.register_blueprint(routes.bp)
+    app.register_blueprint(routes_bp)
     
     return app
