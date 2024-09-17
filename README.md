@@ -5,7 +5,10 @@ This project is an Optical Character Recognition (OCR) system specifically desig
 
 The system is designed to handle various font styles and modifiers in the Gujarati language, making it useful for text digitization, archival, and translation services in regional scripts.
 
-<img width="900" alt="Screenshot 2024-09-16 at 3 29 31 PM" src="https://github.com/user-attachments/assets/11c4792e-7375-4b05-aa15-bc507d0bc940">
+<p align="center">
+  <img width="400" alt="Screenshot 2024-09-16 at 3 29 11 PM" src="https://github.com/user-attachments/assets/c1039577-c663-4ff6-a1ed-a876932e76ec">
+  <img width="400" alt="Screenshot 2024-09-16 at 3 29 31 PM" src="https://github.com/user-attachments/assets/11c4792e-7375-4b05-aa15-bc507d0bc940">
+</p>
 
 
 ## Motivation
