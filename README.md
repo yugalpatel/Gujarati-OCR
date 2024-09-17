@@ -80,7 +80,6 @@ To run the Gujarati OCR project on your local machine, follow these steps:
 - **Pandas**: For managing and manipulating data.
 - **OpenCV**: For image processing and preprocessing.
 - **PIL**: Python Imaging Library for handling image file formats.
-- **Kaggle Notebooks**: For model training and experimentation.
   
 ## Future Work
 
