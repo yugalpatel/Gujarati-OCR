@@ -10,7 +10,6 @@ The system is designed to handle various font styles and modifiers in the Gujara
   <img width="400" alt="Screenshot 2024-09-16 at 3 29 31 PM" src="https://github.com/user-attachments/assets/11c4792e-7375-4b05-aa15-bc507d0bc940">
 </p>
 
-
 ## Motivation
 With the growing importance of preserving and digitizing regional languages, there is a need for advanced OCR systems capable of recognizing non-Latin scripts. Gujarati, a widely spoken language in India, presents challenges such as complex modifiers (Maatra), joint characters, and varied fonts. This project was motivated by the desire to bridge this gap by developing a system that can accurately interpret and digitize Gujarati script, thus contributing to the digitization of regional languages and ensuring their preservation in the digital age.
 
